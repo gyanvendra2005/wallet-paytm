@@ -1,6 +1,6 @@
 import Image, { type ImageProps } from "next/image";
-import { PrismaClient } from "@repo/db/client";
-const client = new PrismaClient();
+// import { PrismaClient } from "@repo/db/client";
+// const client = new PrismaClient();
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;

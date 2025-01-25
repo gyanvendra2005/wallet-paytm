@@ -21,6 +21,12 @@
     "packages/*"
   ],
   "dependencies": {
-    "@repo/db": "^1.0.0"
+    "@radix-ui/react-label": "^2.1.1",
+    "@repo/db": "^1.0.0",
+    "@tabler/icons-react": "^3.29.0",
+    "axios": "^1.7.9",
+    "clsx": "^2.1.1",
+    "motion": "^12.0.3",
+    "tailwind-merge": "^2.6.0"
   }
 }
