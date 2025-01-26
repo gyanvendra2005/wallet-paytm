@@ -1,4 +1,5 @@
-import { Card } from "@repo/ui/tranfercard"
+import { $Enums } from "@repo/db/client"
+
 
 export const OnRampTransactions = ({
     transactions
@@ -6,8 +7,7 @@ export const OnRampTransactions = ({
     transactions: {
         time: Date,
         amount: number,
-        // TODO: Can the type of `status` be more specific?
-        status: string,
+        status: $Enums.OnRampStatus
         provider: string
     }[]
 }) => {
@@ -24,8 +24,8 @@ export const OnRampTransactions = ({
     return <div>
         <div className="pt-2">
             {transactions.map(t => <div className="flex justify-between">
-                <div>
-                    <div className="text-sm">
+                <div className="my-2">
+                    <div className={`text-sm ${t.status=='Success'? "text-green-600" : "text-orange-400"}`}>
                         {t.status}
                     </div>
                     <div className="text-slate-600 text-xs">

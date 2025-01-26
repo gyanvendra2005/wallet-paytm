@@ -70,7 +70,7 @@ export default function Sidebar() {
     { href: "dashboad", icon: <RxDashboard />, label: "Dashboad" },
     // { href: "#i", icon: "fas fa-percentage", label: "Rewards" },
     { href: "transfer", icon: <BiTransfer />, label: "Transfer" },
-    { href: "#r", icon: <CiClock2 />, label: "Transactions" },
+    { href: "transaction", icon: <CiClock2 />, label: "Transactions" },
   ];
 
   return (
