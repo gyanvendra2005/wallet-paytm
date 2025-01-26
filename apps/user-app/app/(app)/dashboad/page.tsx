@@ -1,6 +1,8 @@
+"use client"
 import Image, { type ImageProps } from "next/image";
 import Navbar from "../../../components/Navbar";
 import Sidebar from "../../../components/Sidebar";
+import { useSession } from "next-auth/react";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -9,6 +11,8 @@ type Props = Omit<ImageProps, "src"> & {
 
 const ThemeImage = (props: Props) => {
   const { srcLight, srcDark, ...rest } = props;
+ 
+  
 
   return (
     <>
@@ -19,46 +23,17 @@ const ThemeImage = (props: Props) => {
 };
 
 export default function Dashboad() {
+    const { data: session } = useSession();
+    console.log(session);
   return (
     <div>
        <Navbar/>
 
     <div className="flex h-screen">
      <Sidebar/>
-    {/* <aside className="w-64 bg-gray-100 p-6">
-        <nav>
-            <ul>
-                <li className="mb-4">
-                    <a href="#" className="flex items-center text-purple-600">
-                        <i className="fas fa-home mr-2"></i> Home
-                    </a>
-                </li>
-                <li className="mb-4">
-                    <a href="#" className="flex items-center text-gray-600">
-                        <i className="fas fa-search mr-2"></i> Explore
-                    </a>
-                </li>
-                <li className="mb-4">
-                    <a href="#" className="flex items-center text-gray-600">
-                        <i className="fas fa-percentage mr-2"></i> Rewards
-                    </a>
-                </li>
-                <li className="mb-4">
-                    <a href="#" className="flex items-center text-gray-600">
-                        <i className="fas fa-exchange-alt mr-2"></i> Transfer
-                    </a>
-                </li>
-                <li className="mb-4">
-                    <a href="#" className="flex items-center text-gray-600">
-                        <i className="fas fa-clock mr-2"></i> Transactions
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside> */}
     <main className="flex-1 p-6">
         <header className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-purple-600">Good afternoon, Harkirat</h1>
+            <h1 className="text-3xl font-bold text-purple-600">Hello, {session?.user?.name}</h1>
         </header>
         <section className="mb-8">
             <div className="bg-white p-6 rounded-lg shadow">
@@ -99,9 +74,9 @@ export default function Dashboad() {
             <div className="bg-white p-6 rounded-lg shadow w-1/3 m-3">
                 <div className="flex items-center mb-4">
                     <span className="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-full mr-2">New</span>
-                    <h2 className="text-lg font-medium text-gray-600">Daily Transfer Limit</h2>
+                    <h2 className="text-lg font-medium text-gray-600">Daily Transfer Limit Upto $100</h2>
                 </div>
-                <p className="text-gray-600 mb-4">$100</p>
+                <p className="text-gray-600 mb-4"></p>
                 <p className="text-gray-600 mb-4">To Increace the Amount Upgrade your account</p>
                 <button className="bg-purple-600 text-white px-4 py-2 rounded-full">Upgrade</button>
             </div>

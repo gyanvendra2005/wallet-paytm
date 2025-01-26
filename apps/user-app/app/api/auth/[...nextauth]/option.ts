@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
                     throw new Error("Invalid email or password");
                 }
 
-                const isPasswordCorrect = await bcrypt.compare(credentials.password, user.passsword);
+                const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
 
                 if (!isPasswordCorrect) {
                     throw new Error("Invalid email or password");
@@ -41,6 +41,8 @@ export const authOptions: NextAuthOptions = {
                 return {
                     ...user,
                     id: user.id.toString(),
+                    name: user.name || undefined,
+                    email: user.email || undefined,
                 };
             },
         }),
@@ -59,7 +61,7 @@ export const authOptions: NextAuthOptions = {
         },
         async session({ session, token }) {
             if (token && session.user) {
-                // session.user.id = token.id;
+                session.user.id = token.id;
                 session.user.email = token.email;
                 session.user.name = token.name;
             }

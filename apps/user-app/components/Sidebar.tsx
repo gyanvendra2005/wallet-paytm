@@ -63,9 +63,9 @@ export default function Sidebar() {
 
   const menuItems = [
     { href: "/", icon: "fas fa-home", label: "Home" },
-    { href: "dashboad", icon: "fas fa-search", label: "Dashboard" },
+    { href: "dashboad", icon: "fas fa-search", label: "Dashboad" },
     { href: "#i", icon: "fas fa-percentage", label: "Rewards" },
-    { href: "#y", icon: "fas fa-exchange-alt", label: "Transfer" },
+    { href: "transfer", icon: "fas fa-exchange-alt", label: "Transfer" },
     { href: "#r", icon: "fas fa-clock", label: "Transactions" },
   ];
 

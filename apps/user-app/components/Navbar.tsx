@@ -14,7 +14,7 @@ const Navbar = () => {
             <i className="fas fa-question-circle text-gray-600"></i>
             <i className="fas fa-user-circle text-gray-600"></i>
         </div> */}
-         <div className=" text-2xl font-bold text-purple-600">venmo</div>
+         <div className=" text-2xl font-bold text-purple-600">PayWallet</div>
                         <div className="flex items-center space-x-4">
                             <a href="#" className="bg-purple-600 text-white px-4 py-2 rounded-full">Log in</a>
                             <button className="border border-gray-300 rounded-full px-4 py-1 flex items-center space-x-2">
