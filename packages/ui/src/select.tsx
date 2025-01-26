@@ -1,14 +1,46 @@
 "use client"
-export const Select = ({ options, onSelect }: {
-    onSelect: (value: string) => void;
-    options: {
-        key: string;
-        value: string;
-    }[];
-}) => {
-    return <select onChange={(e) => {
-        onSelect(e.target.value)
-    }} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-        {options.map(option => <option value={option.key}>{option.value}</option>)}
-  </select>
+
+import { useState } from "react";
+import { PrismaClient } from "@repo/db/client";
+
+
+async function transactions(){
+    const prisma = new PrismaClient()
+    const session = await getServerSession(authOptions);
+}
+
+export const Select = () => {
+    const SUPPORTED_BANKS = [{
+        name: "HDFC Bank",
+        redirectUrl: "https://netbanking.hdfcbank.com"
+    }, {
+        name: "Axis Bank",
+        redirectUrl: "https://www.axisbank.com/"
+    }];
+    const [redirectUrl, setRedirectUrl] = useState(SUPPORTED_BANKS[0]?.redirectUrl);
+
+
+    
+
+
+    return <div>
+     <div className="mb-6">
+        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="bank">Bank</label>
+            <select 
+            onChange={ (e) => {setRedirectUrl(SUPPORTED_BANKS.find(x => x.name === e.target.value)?.redirectUrl || "")}}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="bank">
+                {/* <option>HDFC Bank</option> */}
+                {SUPPORTED_BANKS.map(option => <option value={option.name}>{option.name}</option>)}
+            </select>
+          
+     </div>
+     <button className="bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button"  
+           onClick={() => {
+          window.location.href = redirectUrl || "";
+        }}
+     >
+        Add Money
+    </button>
+   
+  </div>
 }

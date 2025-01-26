@@ -12,18 +12,21 @@ export const OnRampTransactions = ({
     }[]
 }) => {
     if (!transactions.length) {
-        return <Card title="Recent Transactions">
+        return <div >
+            <h1 className="text-xl font-semibold mb-4">
+                Recent Transactions
+            </h1>
             <div className="text-center pb-8 pt-8">
                 No Recent transactions
             </div>
-        </Card>
+        </div>
     }
-    return <Card title="Recent Transactions">
+    return <div>
         <div className="pt-2">
             {transactions.map(t => <div className="flex justify-between">
                 <div>
                     <div className="text-sm">
-                        Received INR
+                        {t.status}
                     </div>
                     <div className="text-slate-600 text-xs">
                         {t.time.toDateString()}
@@ -35,5 +38,5 @@ export const OnRampTransactions = ({
 
             </div>)}
         </div>
-    </Card>
+    </div>
 }

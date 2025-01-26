@@ -57,16 +57,20 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { AiOutlineHome } from "react-icons/ai";
+import { RxDashboard } from "react-icons/rx";
+import { BiTransfer } from "react-icons/bi";
+import { CiClock2 } from "react-icons/ci";
 
 export default function Sidebar() {
   const [active, setActive] = useState("/"); // Tracks the active link
 
   const menuItems = [
-    { href: "/", icon: "fas fa-home", label: "Home" },
-    { href: "dashboad", icon: "fas fa-search", label: "Dashboad" },
-    { href: "#i", icon: "fas fa-percentage", label: "Rewards" },
-    { href: "transfer", icon: "fas fa-exchange-alt", label: "Transfer" },
-    { href: "#r", icon: "fas fa-clock", label: "Transactions" },
+    { href: "/", icon: <AiOutlineHome />, label: "Home" },
+    { href: "dashboad", icon: <RxDashboard />, label: "Dashboad" },
+    // { href: "#i", icon: "fas fa-percentage", label: "Rewards" },
+    { href: "transfer", icon: <BiTransfer />, label: "Transfer" },
+    { href: "#r", icon: <CiClock2 />, label: "Transactions" },
   ];
 
   return (
@@ -84,7 +88,7 @@ export default function Sidebar() {
                 }`}
                 onClick={() => setActive(item.href)} // Set active link
               >
-                <i className={`${item.icon} mr-2`}></i>
+                <i className={`${item.icon} mr-2 `}>{item.icon}</i>
                 {item.label}
               </Link>
             </li>

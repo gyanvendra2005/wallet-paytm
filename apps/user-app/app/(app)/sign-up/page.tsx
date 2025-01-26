@@ -13,7 +13,7 @@ import axios from "axios";
 export default function SignupFormDemo() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-  const [age, setAge] = useState("")
+  const [number, setNumber] = useState("")
   const [password, setPassword] = useState("")
   const [isSubmitting,SetisSubmitting] = useState(false)
 
@@ -25,7 +25,7 @@ export default function SignupFormDemo() {
             name,
             email,
             password,
-            age,
+            number
         })
         if(response.status==200){
             console.log("user created");
@@ -73,13 +73,13 @@ export default function SignupFormDemo() {
 
         {/* age */}
         <LabelInputContainer className="mb-8">
-          <Label htmlFor="twitterpassword">Age </Label>
+          <Label htmlFor="twitterpassword">Number </Label>
           <Input
             id="twitterpassword"
             placeholder="18"
             type="number"
-            value={age}
-            onChange={(e)=>{setAge(e.target.value)}}
+            value={number}
+            onChange={(e)=>{setNumber(e.target.value)}}
           />
         </LabelInputContainer>
 
