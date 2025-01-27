@@ -9,6 +9,7 @@ export const OnRampTransactions = ({
         amount: number,
         status: $Enums.OnRampStatus
         provider: string
+        type: $Enums.OnRampType
     }[]
 }) => {
     if (!transactions.length) {
@@ -33,7 +34,7 @@ export const OnRampTransactions = ({
                     </div>
                 </div>
                 <div className="flex flex-col justify-center">
-                    + Rs {t.amount / 100}
+                   {t.type=== "Debited"? "-" : "+"} Rs {t.amount / 100}
                 </div>
 
             </div>)}

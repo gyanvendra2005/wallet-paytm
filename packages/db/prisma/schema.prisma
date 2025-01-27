@@ -53,6 +53,7 @@ model OnRampTransaction {
   provider  String
   amount    Int
   startTime DateTime
+  type      OnRampType
   userId    Int
   user      User         @relation(fields: [userId], references: [id])
 }
@@ -62,12 +63,18 @@ model Balance {
   userId Int  @unique
   amount Int
   locked Int
+  number            String              @unique
   user   User @relation(fields: [userId], references: [id])
 }
 
 enum AuthType {
   Google
   Github
+}
+
+enum OnRampType {
+  Debited
+  Credited
 }
 
 enum OnRampStatus {
