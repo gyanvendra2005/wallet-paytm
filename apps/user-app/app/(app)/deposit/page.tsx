@@ -40,7 +40,7 @@ async function getOnRampTransactions() {
         status: t.status,
         provider: t.provider,
         type: t.type
-    })) as unknown as {time: Date, amount: number, status: OnRampStatus, provider: string, type: OnRampType}[];
+    })) as {time: Date, amount: number, status: OnRampStatus, provider: string, type: OnRampType}[];
 }
 
 export default async function() {
