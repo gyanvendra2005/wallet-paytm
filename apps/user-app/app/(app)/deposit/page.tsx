@@ -1,5 +1,5 @@
 
-import { $Enums, PrismaClient } from "@repo/db/client";
+import { OnRampStatus, OnRampType, PrismaClient } from "@repo/db/client";
 import { OnRampTransactions } from "../../../components/onramptransaction";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/option";
@@ -9,7 +9,10 @@ import Sidebar from "../../../components/Sidebar";
 import Link from "next/link";
 import { Transfer } from "../../../components/transfer";
 
+
+
 async function getBalance() {
+  
     const prisma = new PrismaClient()
     const session = await getServerSession(authOptions);
     const balance = await prisma.balance.findFirst({
@@ -37,7 +40,7 @@ async function getOnRampTransactions() {
         status: t.status,
         provider: t.provider,
         type: t.type
-    })) as {time: Date, amount: number, status: $Enums.OnRampStatus, provider: string, type: $Enums.OnRampType}[];
+    })) as unknown as {time: Date, amount: number, status: OnRampStatus, provider: string, type: OnRampType}[];
 }
 
 export default async function() {
