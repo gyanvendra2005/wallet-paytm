@@ -1,43 +1,3 @@
-// import express from 'express';
-// import { PrismaClient } from '@repo/db/client';
-// import { data, u } from 'motion/react-client';
-
-// const db= new PrismaClient();
-// const app = express();
-
-// app.post('/', async (req, res) => {
-//     const paymentInformation = {
-//         token: req.body.token,
-//         userId: req.body.user_identifier,
-//         amount: req.body.amount
-//     };
-
-//     // Update the user's wallet balance
-//      await db.balance.update({
-//         where:{
-//             userId: paymentInformation.userId
-//         },
-//         data:{
-//             amount:{
-//                 increment: paymentInformation.amount
-//             }
-//         }
-//     })
-
-//      await db.onRampTransaction.update({
-//         where:{
-//             token: paymentInformation.token
-//         },
-//         data:{
-//             status: "Success"
-//         }
-//     })
-
-//     res.status(200).json({ message: 'Payment successful' });
-
-// });
-
-
 import express from "express";
 import { PrismaClient } from '@repo/db/client';
 
@@ -53,9 +13,10 @@ app.post("/hdfcWebhook", async (req, res) => {
         amount: string
     } = {
         token: req.body.token,
-        userId: req.body.user_identifier,
+        userId: req.body.userId,
         amount: req.body.amount
     };
+    console.log(paymentInformation);
 
     try {
         await db.$transaction([
@@ -100,4 +61,7 @@ app.post("/hdfcWebhook", async (req, res) => {
 
 })
 
-app.listen(3003);
+const PORT = 3003;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});

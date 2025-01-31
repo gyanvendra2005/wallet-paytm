@@ -1,18 +1,14 @@
 
-import { OnRampStatus, OnRampType, PrismaClient } from "@repo/db/client";
+import { $Enums, PrismaClient } from "@repo/db/client";
 import { OnRampTransactions } from "../../../components/onramptransaction";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/option";
 import Navbar from "../../../components/Navbar";
 import Sidebar from "../../../components/Sidebar";
-// import { Select } from "../../../components/select";
+import { Select } from "../../../components/select";
 import Link from "next/link";
-import { Transfer } from "../../../components/transfer";
-
-
 
 async function getBalance() {
-  
     const prisma = new PrismaClient()
     const session = await getServerSession(authOptions);
     const balance = await prisma.balance.findFirst({
@@ -38,9 +34,8 @@ async function getOnRampTransactions() {
         time: t.startTime,
         amount: t.amount,
         status: t.status,
-        provider: t.provider,
-        type: t.type
-    })) as {time: Date, amount: number, status: OnRampStatus, provider: string, type: OnRampType}[];
+        provider: t.provider
+    })) as {time: Date, amount: number, status: $Enums.OnRampStatus, provider: string, type: $Enums.OnRampType}[];
 }
 
 export default async function() {
@@ -53,24 +48,25 @@ export default async function() {
      let Total = balance.amount + balance.locked;
     return (
         <div>
-            <Navbar/>
-            <div className="flex h-screen">
-                <Sidebar/>
+            {/* <Navbar/> */}
+            {/* <div className="flex h-screen"> */}
+                {/* <Sidebar/> */}
                <div className="p-6 w-full">
+                   
                     <h1 className="text-4xl font-bold text-purple-600 mb-6">Transfer</h1>
                     <div>
-                        <button className="py-2 m-4 bg-purple-100 rounded-full px-4 hover:bg-purple-300">
+                        {/* <button className="py-2 m-4 bg-purple-100 rounded-full px-4 hover:bg-purple-300">
                             <Link href="/deposit">
                                 <p>Deposit</p>
                             </Link>
-                        </button>
+                        </button> */}
                         <button className="px-4 py-2 m-4 bg-purple-100 rounded-full  hover:bg-purple-300">
-                            <Link href="/deposit">
-                                <p>Transfer</p>
+                            <Link href="/transfer">
+                                <p>transfer</p>
                             </Link>
                         </button>
                         <button className="px-4 py-2 m-4 bg-purple-100 rounded-full  hover:bg-purple-300">
-                            <Link href="/deposit">
+                            <Link href="/#">
                                 <p>WithDraw</p>
                             </Link>
                         </button>
@@ -78,7 +74,7 @@ export default async function() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="bg-blue-50 p-6 rounded-lg shadow-md h-100 ">
 
-                           <Transfer/>
+                           <Select/>
                           
                         </div>
                         <div>
@@ -105,6 +101,6 @@ export default async function() {
                     </div>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }

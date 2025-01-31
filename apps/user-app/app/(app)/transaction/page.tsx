@@ -27,11 +27,11 @@ const page = async () => {
   const transactions = await getOnRampTransactions();
   return (
     <div>
-      <Navbar/>
+      {/* <Navbar/> */}
 
       <div className='flex h-auto'>
-        <Sidebar/>
-      <div className="bg-yellow-50 p-10 m-15 w-full rounded-lg shadow-md">
+        {/* <Sidebar/> */}
+      <div className="bg-yellow-50 p-5 m-5 w-full rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Recent Transactions</h2>
             <p>Only 10 latest transaction</p>
             <OnRampTransactions transactions={transactions} />

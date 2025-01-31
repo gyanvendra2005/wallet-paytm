@@ -27,10 +27,10 @@ export default function Dashboad() {
     console.log(session);
   return (
     <div>
-       <Navbar/>
+       {/* <Navbar/> */}
 
-    <div className="flex h-screen">
-     <Sidebar/>
+    {/* <div className="flex h-screen"> */}
+     {/* <Sidebar/> */}
     <main className="flex-1 p-6">
         <header className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold text-purple-600">Hello, {session?.user?.name}</h1>
@@ -83,7 +83,7 @@ export default function Dashboad() {
         </section>
     </main>
 </div>
-</div>
+// </div>
 // </div>
   );
 }

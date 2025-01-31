@@ -29,11 +29,25 @@ export async function createTransferTransaction(number: String, amount: number) 
         console.log("Creating transaction");
         
         const token = (Math.random() * 1000).toString();
+        
         const receiver = await prisma.user.findFirst({
             where: {
                 number: String(number)
             }
         });
+        const sender = await prisma.balance.findFirst({
+            where: {
+                userId: Number(session.user.id)
+            }
+        });
+         console.log(sender);
+         
+        if (!sender || sender.amount < amount) {
+            return {
+                message: "Insufficient balance"
+            };
+        }
+
         await prisma.$transaction([
             // sender account
             prisma.balance.updateMany({
