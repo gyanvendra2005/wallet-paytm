@@ -2,7 +2,7 @@
 
 import { Card } from "@repo/ui/tranfercard";
 
-import { Select, SelectProps } from "@repo/ui/select";
+import { Select } from "@repo/ui/select";
 import { useState } from "react";
 import { TextInput } from "@repo/ui/textinput";
 
@@ -29,7 +29,7 @@ export const AddMoney = () => {
       {/* Bank Selection */}
       <div className="py-4">
         <label className="block text-sm font-medium text-gray-700">Select Bank</label>
-        <Select onChange={(value: string) => {
+        {/* <Select onChange={(value: string) => {
             setRedirectUrl(
               SUPPORTED_BANKS.find((x) => x.name === value)?.redirectUrl || ""
             );
@@ -44,7 +44,21 @@ export const AddMoney = () => {
             value: x.name,
           }))}
           className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        /> */}
+
+<Select
+  onChange={(value: string) => {
+    setRedirectUrl(
+      SUPPORTED_BANKS.find((x) => x.name === value)?.redirectUrl || ""
+    );
+  }}
+  options={SUPPORTED_BANKS.map((x) => ({
+    key: x.name,
+    value: x.name,
+  }))}
+  className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+/>
+
       </div>
   
       {/* Add Money Button */}
