@@ -1,12 +1,16 @@
 
-import { $Enums, PrismaClient } from "@repo/db/client";
+import { PrismaClient } from "@repo/db/client";
 import { OnRampTransactions } from "../../../components/onramptransaction";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/option";
-import Navbar from "../../../components/Navbar";
-import Sidebar from "../../../components/Sidebar";
 import { Select } from "../../../components/select";
 import Link from "next/link";
+
+enum OnRampStatus {
+    Success,
+    Failed,
+    Pending
+}
 
 async function getBalance() {
     const prisma = new PrismaClient()
@@ -33,9 +37,10 @@ async function getOnRampTransactions() {
     return txns.map(t => ({
         time: t.startTime,
         amount: t.amount,
-        status: t.status,
+        status: OnRampStatus[t.status as keyof typeof OnRampStatus],
+        // type: OnRampStatus[t.type as keyof typeof OnRampStatus],
         provider: t.provider
-    })) as {time: Date, amount: number, status: $Enums.OnRampStatus, provider: string, type: $Enums.OnRampType}[];
+    })) as {time: Date, status:OnRampStatus, amount: number, provider: string}[];
 }
 
 export default async function() {
