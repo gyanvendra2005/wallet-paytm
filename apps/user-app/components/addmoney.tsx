@@ -1,8 +1,8 @@
 "use client"
-import { Button } from "@repo/ui/button";
+
 import { Card } from "@repo/ui/tranfercard";
-import { Center } from "@repo/ui/center";
-import { Select } from "@repo/ui/select";
+
+import { Select, SelectProps } from "@repo/ui/select";
 import { useState } from "react";
 import { TextInput } from "@repo/ui/textinput";
 
@@ -29,8 +29,12 @@ export const AddMoney = () => {
       {/* Bank Selection */}
       <div className="py-4">
         <label className="block text-sm font-medium text-gray-700">Select Bank</label>
-        <Select
-          onSelect={(value) => {
+        <Select onChange={(value: string) => {
+            setRedirectUrl(
+              SUPPORTED_BANKS.find((x) => x.name === value)?.redirectUrl || ""
+            );
+          }}
+          onSelect={(value:String) => {
             setRedirectUrl(
               SUPPORTED_BANKS.find((x) => x.name === value)?.redirectUrl || ""
             );
