@@ -1,6 +1,6 @@
 import React from 'react'
 import { OnRampTransactions } from '../../../components/onramptransaction'
-import { $Enums, PrismaClient } from '@repo/db/client';
+import {  PrismaClient } from '@repo/db/client';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../api/auth/[...nextauth]/option';
 
