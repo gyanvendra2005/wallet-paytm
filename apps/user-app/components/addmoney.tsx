@@ -47,17 +47,24 @@ export const AddMoney = () => {
         /> */}
 
 <Select
-  onChange={(value: string) => {
-    setRedirectUrl(
-      SUPPORTED_BANKS.find((x) => x.name === value)?.redirectUrl || ""
-    );
-  }}
-  options={SUPPORTED_BANKS.map((x) => ({
-    key: x.name,
-    value: x.name,
-  }))}
-  className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  // onChange={(value: string) => {
+  //   setRedirectUrl(
+  //     SUPPORTED_BANKS.find((x) => x.name === value)?.redirectUrl || ""
+  //   );
+  // }}
+  // options={SUPPORTED_BANKS.map((x) => ({
+  //   key: x.name,
+  //   value: x.name,
+  // }))}
+  // className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
 />
+<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="bank">Bank</label>
+              <select 
+               onChange={ (e) => {setRedirectUrl(SUPPORTED_BANKS.find(x => x.name === e.target.value)?.redirectUrl || "")}}
+               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="bank">
+                {/* <option>HDFC Bank</option> */}
+                {SUPPORTED_BANKS.map(option => <option value={option.name}>{option.name}</option>)}
+              </select>
 
       </div>
   
