@@ -3,8 +3,12 @@ import { OnRampTransactions } from '../../../components/onramptransaction'
 import { $Enums, PrismaClient } from '@repo/db/client';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../api/auth/[...nextauth]/option';
-import Navbar from '../../../components/Navbar';
-import Sidebar from '../../../components/Sidebar';
+
+enum OnRampStatus {
+  Success,
+  Failed,
+  Pending
+}
 
 async function getOnRampTransactions() {
     const session = await getServerSession(authOptions);
@@ -13,14 +17,13 @@ async function getOnRampTransactions() {
         where: {
             userId: Number(session?.user?.id)
         }
-    });
+    })as { startTime: Date; amount: number; status: string; provider: string }[];
     return txns.map(t => ({
         time: t.startTime,
         amount: t.amount,
-        status: t.status,
+        status: OnRampStatus[t.status as keyof typeof OnRampStatus],
         provider: t.provider,
-        type: t.type 
-    })) as {time: Date, amount: number, status: $Enums.OnRampStatus, provider: string, type: $Enums.OnRampType}[];
+    })) as {time: Date, amount: number, status: OnRampStatus, provider: string}[];
 }
 
 const page = async () => {

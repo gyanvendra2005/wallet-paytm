@@ -1,15 +1,16 @@
 
-import { OnRampStatus, OnRampType, PrismaClient } from "@repo/db/client";
+import {  PrismaClient } from "@repo/db/client";
 import { OnRampTransactions } from "../../../components/onramptransaction";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/option";
-import Navbar from "../../../components/Navbar";
-import Sidebar from "../../../components/Sidebar";
-// import { Select } from "../../../components/select";
 import Link from "next/link";
 import { Transfer } from "../../../components/transfer";
 
-
+enum OnRampStatus {
+    Success,
+    Failed,
+    Pending
+}
 
 async function getBalance() {
   
@@ -33,14 +34,13 @@ async function getOnRampTransactions() {
         where: {
             userId: Number(session?.user?.id)
         }
-    });
+    })as { startTime: Date; amount: number; status: string; provider: string }[];;
     return txns.map(t => ({
         time: t.startTime,
         amount: t.amount,
-        status: t.status,
+        status: OnRampStatus[t.status as keyof typeof OnRampStatus],
         provider: t.provider,
-        type: t.type
-    })) as {time: Date, amount: number, status: OnRampStatus, provider: string, type: OnRampType}[];
+    })) as {time: Date, amount: number, status: OnRampStatus, provider: string}[];
 }
 
 export default async function() {
