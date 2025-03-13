@@ -81,7 +81,7 @@ enum OnRampStatus {
   Success
   Failure
   Processing
-  // wait
+  // pending
 }
  
 
