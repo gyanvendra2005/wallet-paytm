@@ -6,6 +6,11 @@ enum OnRampStatus {
     Pending
 }
 
+enum OnRampType{
+    Debited,
+    Credited
+}
+
   
 export const OnRampTransactions = ({
     transactions
@@ -15,7 +20,7 @@ export const OnRampTransactions = ({
         amount: number,
         status: OnRampStatus,
         provider: string,
-        // type: OnRampStatus
+        type: OnRampType
     }[]
 }) => {
     if (!transactions.length) {
@@ -33,15 +38,16 @@ export const OnRampTransactions = ({
             {transactions.map(t => <div className="flex justify-between">
                 <div className="my-2">
                     <div className={`text-sm ${t.status === OnRampStatus.Success ? "text-green-600" : "text-orange-400"}`}>
-                        {t.status}
+                        {t.status === OnRampStatus.Success ? "Success" : "Pending"}
+                                                
                     </div>
                     <div className="text-slate-600 text-xs">
                         {t.time.toDateString()}
                     </div>
                 </div>
-                {/* <div className="flex flex-col justify-center">
-                   {t.type=== "Debited"? "-" : "+"} Rs {t.amount / 100}
-                </div> */}
+                <div className={`flex flex-col justify-center ${t.status === OnRampStatus.Success && t.type===OnRampType.Credited ? "text-green-600" : "text-orange-400"}`}>
+                   {t.type=== OnRampType.Debited? "-" : "+"} Rs {t.amount/100}
+                </div>
 
             </div>)}
         </div>
