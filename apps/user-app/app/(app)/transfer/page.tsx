@@ -11,6 +11,10 @@ enum OnRampStatus {
     Failed,
     Pending
 }
+enum OnRampType{
+    Debited,
+    Credited
+}
 
 async function getBalance() {
   
@@ -34,13 +38,13 @@ async function getOnRampTransactions() {
         where: {
             userId: Number(session?.user?.id)
         }
-    })as { startTime: Date; amount: number; status: string; provider: string }[];;
+    })as { startTime: Date; amount: number; type:string; status: string; provider: string }[];;
     return txns.map(t => ({
         time: t.startTime,
         amount: t.amount,
         status: OnRampStatus[t.status as keyof typeof OnRampStatus],
         provider: t.provider,
-    })) as {time: Date, amount: number, status: OnRampStatus, provider: string}[];
+    })) as {time: Date, amount: number,type:OnRampType, status: OnRampStatus, provider: string}[];
 }
 
 export default async function() {
