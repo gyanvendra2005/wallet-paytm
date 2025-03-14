@@ -12,6 +12,11 @@ enum OnRampStatus {
     Pending
 }
 
+enum OnRampType{
+    Debited,
+    Credited
+}
+
 async function getBalance() {
     const prisma = new PrismaClient()
     const session = await getServerSession(authOptions);
@@ -38,15 +43,15 @@ async function getOnRampTransactions() {
         where: {
             userId: Number(session?.user?.id)
         }
-    }) as { startTime: Date; amount: number; status: string; provider: string }[];
+    }) as { startTime: Date; amount: number; type:string; status: string; provider: string }[];
     
     return txns.map(t => ({
         time: t.startTime,
         amount: t.amount,
         status: OnRampStatus[t.status as keyof typeof OnRampStatus],
-        // type: OnRampStatus[t.type as keyof typeof OnRampStatus],
+        type: OnRampType[t.type as keyof typeof OnRampType],
         provider: t.provider
-    })) as {time: Date, status:OnRampStatus, amount: number, provider: string}[];
+    })) as {time: Date,type:OnRampType, status:OnRampStatus, amount: number, provider: string}[];
 }
 
 export default async function() {
