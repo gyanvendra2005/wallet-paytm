@@ -7,6 +7,9 @@ declare module 'next-auth' {
         name?:string;
         email?:string;
         number?:string;
+        Balance?:number;
+        amount?:number;
+        OnRamp?:number
     }
     interface Session{
         user:{
@@ -14,6 +17,9 @@ declare module 'next-auth' {
              name?:string;
              email?:string;
              number?:string;
+             Balance?:number;
+             amount?:number;
+             OnRamp?:number;
         }  & DefaultSession;['user']
 
     }
@@ -25,5 +31,8 @@ declare module 'next-auth/jwt' {
         name?:string;
         email?:string;
         number?:string;
+        Balance?:number;
+        amount?:number;
+        OnRamp?:number
     }
 }

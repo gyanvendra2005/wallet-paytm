@@ -1,8 +1,7 @@
 "use client"
 import Image, { type ImageProps } from "next/image";
-import Navbar from "../../../components/Navbar";
-import Sidebar from "../../../components/Sidebar";
 import { useSession } from "next-auth/react";
+import LineChart from "../../../components/LineChart";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -24,7 +23,9 @@ const ThemeImage = (props: Props) => {
 
 export default function Dashboad() {
     const { data: session } = useSession();
-    console.log(session);
+    console.log(session?.user?.name);
+    console.log(session?.user.Balance);
+    
   return (
     <div>
        {/* <Navbar/> */}
@@ -40,25 +41,10 @@ export default function Dashboad() {
                 <div className="flex justify-between items-center mb-4">
                     <div>
                         <h2 className="text-lg font-medium text-gray-600">Wallet Balance</h2>
-                        <p className="text-3xl font-bold text-black">$0.00</p>
+                        <p className="text-3xl font-bold text-black">{session?.user?.Balance}</p>
                     </div>
                 </div>
-                <div className="border-b border-purple-600 mb-4"></div>
-                <div className="flex justify-between text-gray-600 text-sm">
-                    <span>20 FEB</span>
-                    <span>28 FEB</span>
-                    <span>7 MAR</span>
-                    <span>15 MAR</span>
-                    <span>23 MAR</span>
-                </div>
-                <div className="flex justify-center mt-4">
-                    <button className="bg-gray-200 text-gray-600 px-4 py-2 rounded-full mx-1">1W</button>
-                    <button className="bg-gray-200 text-gray-600 px-4 py-2 rounded-full mx-1">1M</button>
-                    <button className="bg-gray-200 text-gray-600 px-4 py-2 rounded-full mx-1">3M</button>
-                    <button className="bg-gray-200 text-gray-600 px-4 py-2 rounded-full mx-1">6M</button>
-                    <button className="bg-gray-200 text-gray-600 px-4 py-2 rounded-full mx-1">1Y</button>
-                    <button className="bg-gray-200 text-gray-600 px-4 py-2 rounded-full mx-1">ALL</button>
-                </div>
+               <LineChart/>
             </div>
         </section>
         <section className="flex ">

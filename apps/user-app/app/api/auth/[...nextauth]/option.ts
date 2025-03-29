@@ -53,6 +53,10 @@ export const authOptions: NextAuthOptions = {
                 token.id = user.id?.toString() || "";
                 token.email = user.email;
                 token.name = user.name;
+                token.amount = user.amount;
+                token.Balance = user.Balance;
+                token.OnRamp = user.OnRamp;
+
             }
             if (trigger === "update" && session?.user) {
                 return { ...token, ...session.user };
@@ -64,6 +68,9 @@ export const authOptions: NextAuthOptions = {
                 session.user.id = token.id;
                 session.user.email = token.email;
                 session.user.name = token.name;
+                session.user.amount = token.amount;
+                session.user.Balance = token.Balance;
+                session.user.OnRamp= token.OnRamp
             }
             return session;
         },
