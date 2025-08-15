@@ -88,7 +88,6 @@ const prisma = new PrismaClient(); // Initialize Prisma client once
 
 export const GET = async (request: Request) => {
   try {
-    // Extract userId from query parameters and convert to number
     const { searchParams } = new URL(request.url);
     const userIdParam = searchParams.get("userId");
 

@@ -51,11 +51,8 @@ export const authOptions: NextAuthOptions = {
         async jwt({ token, user, trigger, session }) {
             if (user) {
                 token.id = user.id?.toString() || "";
-                token.email = user.email;
-                token.name = user.name;
-                token.amount = user.amount;
-                token.Balance = user.Balance;
-                token.OnRamp = user.OnRamp;
+                token.email = user.email ?? undefined;
+                token.name = user.name ?? undefined;
 
             }
             if (trigger === "update" && session?.user) {
@@ -64,19 +61,10 @@ export const authOptions: NextAuthOptions = {
             return token;
         },
         async session({ session, token }) {
-            if (session?.user?.id) {
-        const balance = await prisma.balance.findUnique({
-          where: { userId: Number(session.user.id) },
-          select: { amount: true }
-        });
-      }
             if (token && session.user) {
                 session.user.id = token.id;
                 session.user.email = token.email;
                 session.user.name = token.name;
-                session.user.amount = token.amount;
-                session.user.Balance = token.Balance;
-                session.user.OnRamp= token.OnRamp
             }
             return session;
         },

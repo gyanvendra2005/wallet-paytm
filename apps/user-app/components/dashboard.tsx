@@ -1,20 +1,35 @@
+"use client"
+// import Image, { type ImageProps } from "next/image";
+import { useSession } from "next-auth/react";
+// import LineChart from "../../../components/LineChart";
 
-import { PrismaClient } from "@prisma/client";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../../api/auth/[...nextauth]/option";
-import Dashboad from "../../../components/dashboard";
+// type Props = Omit<ImageProps, "src"> & {
+//   srcLight: string;
+//   srcDark: string;
+// };
+// const ThemeImage = (props: Props) => {
+//   const { srcLight, srcDark, ...rest } = props;
+ 
+  
+
+//   return (
+//     <>
+//       <Image {...rest} src={srcLight} className="imgLight" />
+//       <Image {...rest} src={srcDark} className="imgDark" />
+//     </>
+//   );
+// };
 
 
 
-export default async function Dashboard() {
-  const session = await getServerSession(authOptions);
-  const prisma = new PrismaClient();
-  const balance = await prisma.balance.findUnique({
-    where: { userId: Number(session?.user?.id) }
-  });
-
+export default async function Dashboad(balance: { amount: number; locked: number }) {
+    const { data: session } = useSession();
+    // console.log(session?.user?.name);
+    // console.log(session?.user.Balance);
+    
+    
   return (
-     <div>
+    <div>
        {/* <Navbar/> */}
 
     {/* <div className="flex h-screen"> */}
@@ -28,7 +43,7 @@ export default async function Dashboard() {
                 <div className="flex justify-between items-center mb-4">
                     <div>
                         <h2 className="text-lg font-medium text-gray-600">Wallet Balance</h2>
-                        <p className="text-3xl font-bold text-black">Rs {balance?.amount}</p>
+                        <p className="text-3xl font-bold text-black">{balance.amount}</p>
                     </div>
                 </div>
                {/* <LineChart/> */}

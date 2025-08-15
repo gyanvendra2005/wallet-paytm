@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import { Label } from "../../../components/ui/label";
-import { Input } from "../../../components/ui/input";
+// import { Label } from "../../../components/ui/label";
+// import { Input } from "../../../components/ui/input";
 import { cn } from "../../../lib/utils";
 // import { useToast } from '@/hooks/use-toast';
 // import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signIn } from 'next-auth/react';
-import { IconBrandFacebook, IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
+// import { IconBrandFacebook, IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
+import Link from "next/link";
 
 export default function SignupForm() {
     const [email, setEmail] = useState('');
@@ -69,10 +70,10 @@ export default function SignupForm() {
         <div className="w-full h-auto p-4 shadow-input bg-gradient-to-br from-purple-100 to-purple-200 dark:from-gray-900 dark:to-gray-800">
   <div className="max-w-md w-full mx-auto rounded-lg md:rounded-2xl p-6 md:p-8 m-8 shadow-lg bg-white dark:bg-black">
     <h2 className="font-extrabold text-2xl text-center text-neutral-800 dark:text-neutral-200">
-      Welcome to BookAdda
+      Welcome to PayWallet
     </h2>
     <p className="text-neutral-600 text-center text-sm max-w-sm mt-2 dark:text-neutral-400">
-      Sign In to Buy and Sell Books
+      Sign In to your account to continue using our services. If you don't have an account, <Link href="/sign-up" className="text-purple-600 hover:underline dark:text-purple-400">sign up</Link> now.
     </p>
 
     <form className="my-8 space-y-6" onSubmit={handleSubmit}>

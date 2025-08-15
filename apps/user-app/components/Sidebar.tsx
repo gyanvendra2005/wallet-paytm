@@ -63,12 +63,11 @@ import { BiTransfer } from "react-icons/bi";
 import { CiClock2 } from "react-icons/ci";
 
 export default function Sidebar() {
-  const [active, setActive] = useState("/"); // Tracks the active link
+  const [active, setActive] = useState("/");
 
   const menuItems = [
     { href: "/", icon: <AiOutlineHome />, label: "Home" },
     { href: "dashboad", icon: <RxDashboard />, label: "Dashboad" },
-    // { href: "#i", icon: "fas fa-percentage", label: "Rewards" },
     { href: "transfer", icon: <BiTransfer />, label: "Transfer" },
     { href: "transaction", icon: <CiClock2 />, label: "Transactions" },
   ];
@@ -86,7 +85,7 @@ export default function Sidebar() {
                     ? "text-purple-600 "
                     : "text-gray-600 hover:text-purple-600"
                 }`}
-                onClick={() => setActive(item.href)} // Set active link
+                onClick={() => setActive(item.href)}
               >
                 <i className={`${item.icon} mr-2 `}>{item.icon}</i>
                 {item.label}

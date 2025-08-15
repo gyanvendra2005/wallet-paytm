@@ -43,7 +43,9 @@ model Merchant {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   name      String?
-  auth_type AuthType
+  number            String              @unique
+  password          String
+  // auth_type AuthType
 }
 
 model OnRampTransaction {
@@ -81,7 +83,6 @@ enum OnRampStatus {
   Success
   Failure
   Processing
-  // pending
 }
  
 
